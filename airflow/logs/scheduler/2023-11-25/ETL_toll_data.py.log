@@ -1,0 +1,85 @@
+[2023-11-25 17:53:21,710] {processor.py:153} INFO - Started process (PID=2944) to work on /home/project/airflow/dags/ETL_toll_data.py
+[2023-11-25 17:53:21,710] {processor.py:641} INFO - Processing file /home/project/airflow/dags/ETL_toll_data.py for tasks to queue
+[2023-11-25 17:53:21,711] {logging_mixin.py:115} INFO - [2023-11-25 17:53:21,711] {dagbag.py:508} INFO - Filling up the DagBag from /home/project/airflow/dags/ETL_toll_data.py
+[2023-11-25 17:53:21,722] {processor.py:651} INFO - DAG(s) dict_keys(['ETL_toll_data']) retrieved from /home/project/airflow/dags/ETL_toll_data.py
+[2023-11-25 17:53:21,818] {logging_mixin.py:115} INFO - [2023-11-25 17:53:21,818] {dag.py:2420} INFO - Sync 1 DAGs
+[2023-11-25 17:53:21,867] {logging_mixin.py:115} INFO - [2023-11-25 17:53:21,867] {dag.py:2972} INFO - Setting next_dagrun for ETL_toll_data to 2023-11-25T00:00:00+00:00, run_after=2023-11-26T00:00:00+00:00
+[2023-11-25 17:53:22,281] {logging_mixin.py:115} WARNING - /home/airflow/.local/lib/python3.7/site-packages/airflow/models/dagbag.py:610 DeprecationWarning: DAG.full_filepath is deprecated in favour of fileloc
+[2023-11-25 17:53:22,284] {logging_mixin.py:115} INFO - [2023-11-25 17:53:22,281] {dagbag.py:610} ERROR - Failed to write serialized DAG: /home/project/airflow/dags/ETL_toll_data.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/models/dagbag.py", line 602, in _serialize_dag_capturing_errors
+    session=session,
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/utils/session.py", line 68, in wrapper
+    return func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/models/serialized_dag.py", line 142, in write_dag
+    (timezone.utcnow() - timedelta(seconds=min_update_interval)) < cls.last_updated,
+  File "/home/airflow/.local/lib/python3.7/site-packages/sqlalchemy/orm/query.py", line 2810, in first
+    return self.limit(1)._iter().first()
+  File "/home/airflow/.local/lib/python3.7/site-packages/sqlalchemy/orm/query.py", line 2897, in _iter
+    execution_options={"_sa_orm_load_options": self.load_options},
+  File "/home/airflow/.local/lib/python3.7/site-packages/sqlalchemy/orm/session.py", line 1688, in execute
+    conn = self._connection_for_bind(bind)
+  File "/home/airflow/.local/lib/python3.7/site-packages/sqlalchemy/orm/session.py", line 1530, in _connection_for_bind
+    engine, execution_options
+  File "/home/airflow/.local/lib/python3.7/site-packages/sqlalchemy/orm/session.py", line 721, in _connection_for_bind
+    self._assert_active()
+  File "/home/airflow/.local/lib/python3.7/site-packages/sqlalchemy/orm/session.py", line 608, in _assert_active
+    code="7s2a",
+sqlalchemy.exc.PendingRollbackError: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "serialized_dag_pkey"
+DETAIL:  Key (dag_id)=(ETL_toll_data) already exists.
+
+[SQL: INSERT INTO serialized_dag (dag_id, fileloc, fileloc_hash, data, data_compressed, last_updated, dag_hash) VALUES (%(dag_id)s, %(fileloc)s, %(fileloc_hash)s, %(data)s, %(data_compressed)s, %(last_updated)s, %(dag_hash)s)]
+[parameters: {'dag_id': 'ETL_toll_data', 'fileloc': '/home/project/airflow/dags/ETL_toll_data.py', 'fileloc_hash': 21022287000471476, 'data': '{"__version": 1, "dag": {"_task_group": {"_group_id": null, "prefix_group_id": true, "tooltip": "", "ui_color": "CornflowerBlue", "ui_fgcolor": "#000 ... (5336 characters truncated) ... nment/staging/extracted_data.csv > /home/project/airflow/dags/finalassignment/staging/transformed_data.csv"}], "dag_dependencies": [], "params": {}}}', 'data_compressed': None, 'last_updated': datetime.datetime(2023, 11, 25, 17, 53, 21, 754218, tzinfo=Timezone('UTC')), 'dag_hash': 'c3a7078b8e875d355810933203129a55'}]
+(Background on this error at: https://sqlalche.me/e/14/gkpj) (Background on this error at: https://sqlalche.me/e/14/7s2a)
+[2023-11-25 17:53:22,284] {logging_mixin.py:115} INFO - [2023-11-25 17:53:22,284] {dag.py:2420} INFO - Sync 1 DAGs
+[2023-11-25 17:53:22,285] {processor.py:164} ERROR - Got an exception! Propagating...
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/dag_processing/processor.py", line 158, in _run_file_processor
+    callback_requests=callback_requests,
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/utils/session.py", line 71, in wrapper
+    return func(*args, session=session, **kwargs)
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/dag_processing/processor.py", line 660, in process_file
+    dagbag.sync_to_db()
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/utils/session.py", line 71, in wrapper
+    return func(*args, session=session, **kwargs)
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/models/dagbag.py", line 616, in sync_to_db
+    for attempt in run_with_db_retries(logger=self.log):
+  File "/home/airflow/.local/lib/python3.7/site-packages/tenacity/__init__.py", line 382, in __iter__
+    do = self.iter(retry_state=retry_state)
+  File "/home/airflow/.local/lib/python3.7/site-packages/tenacity/__init__.py", line 349, in iter
+    return fut.result()
+  File "/usr/local/lib/python3.7/concurrent/futures/_base.py", line 428, in result
+    return self.__get_result()
+  File "/usr/local/lib/python3.7/concurrent/futures/_base.py", line 384, in __get_result
+    raise self._exception
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/models/dagbag.py", line 630, in sync_to_db
+    DAG.bulk_write_to_db(self.dags.values(), session=session)
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/utils/session.py", line 68, in wrapper
+    return func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/models/dag.py", line 2428, in bulk_write_to_db
+    orm_dags: List[DagModel] = with_row_locks(query, of=DagModel, session=session).all()
+  File "/home/airflow/.local/lib/python3.7/site-packages/sqlalchemy/orm/query.py", line 2759, in all
+    return self._iter().all()
+  File "/home/airflow/.local/lib/python3.7/site-packages/sqlalchemy/orm/query.py", line 2897, in _iter
+    execution_options={"_sa_orm_load_options": self.load_options},
+  File "/home/airflow/.local/lib/python3.7/site-packages/sqlalchemy/orm/session.py", line 1688, in execute
+    conn = self._connection_for_bind(bind)
+  File "/home/airflow/.local/lib/python3.7/site-packages/sqlalchemy/orm/session.py", line 1530, in _connection_for_bind
+    engine, execution_options
+  File "/home/airflow/.local/lib/python3.7/site-packages/sqlalchemy/orm/session.py", line 721, in _connection_for_bind
+    self._assert_active()
+  File "/home/airflow/.local/lib/python3.7/site-packages/sqlalchemy/orm/session.py", line 608, in _assert_active
+    code="7s2a",
+sqlalchemy.exc.PendingRollbackError: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "serialized_dag_pkey"
+DETAIL:  Key (dag_id)=(ETL_toll_data) already exists.
+
+[SQL: INSERT INTO serialized_dag (dag_id, fileloc, fileloc_hash, data, data_compressed, last_updated, dag_hash) VALUES (%(dag_id)s, %(fileloc)s, %(fileloc_hash)s, %(data)s, %(data_compressed)s, %(last_updated)s, %(dag_hash)s)]
+[parameters: {'dag_id': 'ETL_toll_data', 'fileloc': '/home/project/airflow/dags/ETL_toll_data.py', 'fileloc_hash': 21022287000471476, 'data': '{"__version": 1, "dag": {"_task_group": {"_group_id": null, "prefix_group_id": true, "tooltip": "", "ui_color": "CornflowerBlue", "ui_fgcolor": "#000 ... (5336 characters truncated) ... nment/staging/extracted_data.csv > /home/project/airflow/dags/finalassignment/staging/transformed_data.csv"}], "dag_dependencies": [], "params": {}}}', 'data_compressed': None, 'last_updated': datetime.datetime(2023, 11, 25, 17, 53, 21, 754218, tzinfo=Timezone('UTC')), 'dag_hash': 'c3a7078b8e875d355810933203129a55'}]
+(Background on this error at: https://sqlalche.me/e/14/gkpj) (Background on this error at: https://sqlalche.me/e/14/7s2a)
+[2023-11-25 17:53:52,947] {processor.py:153} INFO - Started process (PID=3007) to work on /home/project/airflow/dags/ETL_toll_data.py
+[2023-11-25 17:53:52,948] {processor.py:641} INFO - Processing file /home/project/airflow/dags/ETL_toll_data.py for tasks to queue
+[2023-11-25 17:53:52,949] {logging_mixin.py:115} INFO - [2023-11-25 17:53:52,949] {dagbag.py:508} INFO - Filling up the DagBag from /home/project/airflow/dags/ETL_toll_data.py
+[2023-11-25 17:53:52,959] {processor.py:651} INFO - DAG(s) dict_keys(['ETL_toll_data']) retrieved from /home/project/airflow/dags/ETL_toll_data.py
+[2023-11-25 17:53:53,043] {logging_mixin.py:115} INFO - [2023-11-25 17:53:53,043] {dag.py:2420} INFO - Sync 1 DAGs
+[2023-11-25 17:53:53,070] {logging_mixin.py:115} INFO - [2023-11-25 17:53:53,069] {dag.py:2972} INFO - Setting next_dagrun for ETL_toll_data to 2023-11-25T00:00:00+00:00, run_after=2023-11-26T00:00:00+00:00
+[2023-11-25 17:53:53,095] {processor.py:161} INFO - Processing /home/project/airflow/dags/ETL_toll_data.py took 0.152 seconds

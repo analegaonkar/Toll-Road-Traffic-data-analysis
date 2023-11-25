@@ -1,0 +1,28 @@
+[2023-11-25 17:53:37,792] {taskinstance.py:1179} INFO - Dependencies all met for <TaskInstance: ETL_toll_data.extract_data_from_tsv manual__2023-11-25T17:53:34.346271+00:00 [queued]>
+[2023-11-25 17:53:37,806] {taskinstance.py:1179} INFO - Dependencies all met for <TaskInstance: ETL_toll_data.extract_data_from_tsv manual__2023-11-25T17:53:34.346271+00:00 [queued]>
+[2023-11-25 17:53:37,806] {taskinstance.py:1376} INFO - 
+--------------------------------------------------------------------------------
+[2023-11-25 17:53:37,806] {taskinstance.py:1377} INFO - Starting attempt 1 of 2
+[2023-11-25 17:53:37,806] {taskinstance.py:1378} INFO - 
+--------------------------------------------------------------------------------
+[2023-11-25 17:53:37,825] {taskinstance.py:1397} INFO - Executing <Task(BashOperator): extract_data_from_tsv> on 2023-11-25 17:53:34.346271+00:00
+[2023-11-25 17:53:37,835] {standard_task_runner.py:52} INFO - Started process 1338 to run task
+[2023-11-25 17:53:37,842] {standard_task_runner.py:79} INFO - Running: ['***', 'tasks', 'run', 'ETL_toll_data', 'extract_data_from_tsv', 'manual__2023-11-25T17:53:34.346271+00:00', '--job-id', '22', '--raw', '--subdir', 'DAGS_FOLDER/finalassignment/staging/ETL_toll_data.py', '--cfg-path', '/tmp/tmp0hd_m46s', '--error-file', '/tmp/tmppdqrsiws']
+[2023-11-25 17:53:37,842] {standard_task_runner.py:80} INFO - Job 22: Subtask extract_data_from_tsv
+[2023-11-25 17:53:37,949] {task_command.py:371} INFO - Running <TaskInstance: ETL_toll_data.extract_data_from_tsv manual__2023-11-25T17:53:34.346271+00:00 [running]> on host 55fecb89de6d
+[2023-11-25 17:53:38,170] {taskinstance.py:1591} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_EMAIL=an@dummy.com
+AIRFLOW_CTX_DAG_OWNER=AN
+AIRFLOW_CTX_DAG_ID=ETL_toll_data
+AIRFLOW_CTX_TASK_ID=extract_data_from_tsv
+AIRFLOW_CTX_EXECUTION_DATE=2023-11-25T17:53:34.346271+00:00
+AIRFLOW_CTX_TRY_NUMBER=1
+AIRFLOW_CTX_DAG_RUN_ID=manual__2023-11-25T17:53:34.346271+00:00
+[2023-11-25 17:53:38,172] {subprocess.py:62} INFO - Tmp dir root location: 
+ /tmp
+[2023-11-25 17:53:38,173] {subprocess.py:74} INFO - Running command: ['bash', '-c', 'cut -f5,6,7 /home/project/***/dags/finalassignment/tollplaza-data.tsv | tr -s "[:blank:]" "," | tr -d "\\r" > /home/project/***/dags/finalassignment/staging/tsv_data.csv']
+[2023-11-25 17:53:38,201] {subprocess.py:85} INFO - Output:
+[2023-11-25 17:53:38,224] {subprocess.py:96} INFO - Command exited with return code 0
+[2023-11-25 17:53:38,287] {taskinstance.py:1420} INFO - Marking task as SUCCESS. dag_id=ETL_toll_data, task_id=extract_data_from_tsv, execution_date=20231125T175334, start_date=20231125T175337, end_date=20231125T175338
+[2023-11-25 17:53:38,333] {local_task_job.py:156} INFO - Task exited with return code 0
+[2023-11-25 17:53:38,397] {local_task_job.py:273} INFO - 1 downstream tasks scheduled from follow-on schedule check
